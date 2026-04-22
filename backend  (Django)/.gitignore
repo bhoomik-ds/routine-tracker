@@ -1,0 +1,15 @@
+# Python & Django
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+
+# Database (NEVER push your local database to GitHub!)
+db.sqlite3
+
+# Environment Variables (For your secret keys later)
+.env
+
+# Render Static Files
+staticfiles/
