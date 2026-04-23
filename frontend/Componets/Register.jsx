@@ -22,7 +22,7 @@ const Register = ({ onRegisterSuccess, onGoToLogin }) => {
     email: "",
     otp: "",
     username: "", 
-    fullName: "", // <--- NEW: Replaced dob with fullName
+    fullName: "", 
     password: "",
     confirmPassword: ""
   });
@@ -36,6 +36,7 @@ const Register = ({ onRegisterSuccess, onGoToLogin }) => {
     setLoading(true);
     setError("");
     try {
+      // Correctly pointing to the live Render backend
       await axios.post('https://routine-tracker-api-g32g.onrender.com/api/auth/send-otp/', { 
         email: formData.email 
       });
@@ -52,6 +53,7 @@ const Register = ({ onRegisterSuccess, onGoToLogin }) => {
     setLoading(true);
     setError("");
     try {
+      // Correctly pointing to the live Render backend
       await axios.post('https://routine-tracker-api-g32g.onrender.com/api/auth/verify-otp/', { 
         email: formData.email, 
         otp_code: formData.otp 
@@ -80,10 +82,11 @@ const Register = ({ onRegisterSuccess, onGoToLogin }) => {
 
     setLoading(true);
     try {
+      // Correctly pointing to the live Render backend
       await axios.post('https://routine-tracker-api-g32g.onrender.com/api/auth/register/', {
         username: formData.username, 
         email: formData.email,
-        full_name: formData.fullName, // <--- UPDATED: Sending full_name instead of dob
+        full_name: formData.fullName, 
         password: formData.password,
         confirm_password: formData.confirmPassword
       });
@@ -167,7 +170,6 @@ const Register = ({ onRegisterSuccess, onGoToLogin }) => {
               />
             </div>
 
-            {/* --- NEW: Full Name Input (Replaced DOB) --- */}
             <div className="relative">
               <HiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
               <input 

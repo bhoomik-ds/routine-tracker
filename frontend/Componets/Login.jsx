@@ -11,12 +11,15 @@ const Login = ({ onLoginSuccess, onGoToRegister, onGoToForgotPassword }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // <--- ADDED: Loading state
   
-  // --- NEW: State to toggle password visibility ---
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true); // <--- Disable button and show loading text
+    setError("");
+    
     try {
       const response = await axios.post('https://routine-tracker-api-g32g.onrender.com/api/token/', {
         username: email, 
@@ -27,6 +30,8 @@ const Login = ({ onLoginSuccess, onGoToRegister, onGoToForgotPassword }) => {
       onLoginSuccess(); 
     } catch (err) {
       setError("Invalid email or password. Please try again.");
+    } finally {
+      setLoading(false); // <--- Re-enable button when request finishes
     }
   };
 
@@ -42,7 +47,7 @@ const Login = ({ onLoginSuccess, onGoToRegister, onGoToForgotPassword }) => {
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
-          {error && <p className="text-red-500 text-sm text-center font-bold">{error}</p>}
+          {error && <p className="text-red-500 text-sm text-center font-bold bg-red-50 p-3 rounded-xl">{error}</p>}
           
           <div className="relative">
             <HiOutlineEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
@@ -59,16 +64,13 @@ const Login = ({ onLoginSuccess, onGoToRegister, onGoToForgotPassword }) => {
           <div className="relative">
             <HiLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
             <input 
-              // --- NEW: Toggle input type ---
               type={showPassword ? "text" : "password"} 
               placeholder="Password"
-              // Add pr-12 to make room for the eye icon
               className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 pl-12 pr-12 focus:outline-none focus:border-[#2463EB] transition-all"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {/* --- NEW: Eye Icon Toggle Button --- */}
             <button 
               type="button"
               onClick={() => setShowPassword(!showPassword)}
@@ -90,9 +92,10 @@ const Login = ({ onLoginSuccess, onGoToRegister, onGoToForgotPassword }) => {
 
           <button 
             type="submit"
-            className="w-full bg-gradient-to-r from-[#2463EB] to-[#0A2F6B] text-white py-4 rounded-2xl font-bold text-lg shadow-lg shadow-blue-200 hover:scale-[1.02] active:scale-95 transition-all"
+            disabled={loading} // <--- Prevent double clicks
+            className="w-full bg-gradient-to-r from-[#2463EB] to-[#0A2F6B] text-white py-4 rounded-2xl font-bold text-lg shadow-lg shadow-blue-200 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-70"
           >
-            Sign In
+            {loading ? "Signing In..." : "Sign In"} {/* <--- UX feedback */}
           </button>
         </form>
 
