@@ -58,7 +58,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173", "http://localhost:5174", # Vite default ports
+    "http://localhost:5173", # Your local frontend
+    "https://your-routine-tracker.vercel.app", # <-- ADD YOUR REAL VERCEL URL HERE
 ]
 
 ROOT_URLCONF = 'core.urls'
