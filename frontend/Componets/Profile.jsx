@@ -27,7 +27,7 @@ const Profile = ({ userData, onProfileUpdate }) => {
 
     try {
       const token = localStorage.getItem('access_token');
-      const response = await axios.put('http://127.0.0.1:8000/api/user/me/', formData, {
+      const response = await axios.put('https://routine-tracker-api-g32g.onrender.com/api/user/me/', formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       

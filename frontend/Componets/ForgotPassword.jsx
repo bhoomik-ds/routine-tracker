@@ -27,7 +27,7 @@ const ForgotPassword = ({ onBackToLogin }) => {
     e.preventDefault();
     setLoading(true); setError("");
     try {
-      await axios.post('http://127.0.0.1:8000/api/auth/forgot-password/send-otp/', { email: formData.email });
+      await axios.post('https://routine-tracker-api-g32g.onrender.com/api/auth/forgot-password/send-otp/', { email: formData.email });
       setStep(2);
     } catch (err) {
       setError(err.response?.data?.error || "Account not found.");
@@ -39,7 +39,7 @@ const ForgotPassword = ({ onBackToLogin }) => {
     e.preventDefault();
     setLoading(true); setError("");
     try {
-      await axios.post('http://127.0.0.1:8000/api/auth/verify-otp/', { email: formData.email, otp_code: formData.otp });
+      await axios.post('https://routine-tracker-api-g32g.onrender.com/api/auth/verify-otp/', { email: formData.email, otp_code: formData.otp });
       setStep(3);
     } catch (err) {
       setError(err.response?.data?.error || "Invalid code.");
@@ -56,7 +56,7 @@ const ForgotPassword = ({ onBackToLogin }) => {
 
     setLoading(true);
     try {
-      await axios.post('http://127.0.0.1:8000/api/auth/forgot-password/reset/', {
+      await axios.post('https://routine-tracker-api-g32g.onrender.com/api/auth/forgot-password/reset/', {
         email: formData.email,
         password: formData.password,
         confirm_password: formData.confirmPassword

@@ -25,7 +25,7 @@ const RoutineList = ({ tasks, onRefresh, onRequireAuth }) => {
     if (!token) return onRequireAuth();
 
     try {
-      await axios.patch(`http://127.0.0.1:8000/api/tasks/${task.id}/`, 
+      await axios.patch(`https://routine-tracker-api-g32g.onrender.com/api/tasks/${task.id}/`, 
         { is_completed: !task.is_completed },
         { headers: { Authorization: `Bearer ${token}` } } 
       );
@@ -41,7 +41,7 @@ const RoutineList = ({ tasks, onRefresh, onRequireAuth }) => {
     if (!token) return onRequireAuth();
 
     try {
-      await axios.post('http://127.0.0.1:8000/api/tasks/', 
+      await axios.post('https://routine-tracker-api-g32g.onrender.com/api/tasks/', 
         {
           title: newTask,
           current_goal: 1.0, 
@@ -66,7 +66,7 @@ const RoutineList = ({ tasks, onRefresh, onRequireAuth }) => {
     if (!token) return onRequireAuth();
 
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/tasks/${taskId}/`, {
+      await axios.delete(`https://routine-tracker-api-g32g.onrender.com/api/tasks/${taskId}/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       onRefresh();
@@ -81,7 +81,7 @@ const RoutineList = ({ tasks, onRefresh, onRequireAuth }) => {
     if (!token) return onRequireAuth();
 
     try {
-      await axios.patch(`http://127.0.0.1:8000/api/tasks/${taskId}/`, 
+      await axios.patch(`https://routine-tracker-api-g32g.onrender.com/api/tasks/${taskId}/`, 
         { 
           title: editTitle,
           notification_time: editTime || null 

@@ -22,7 +22,7 @@ function App() {
 
   const fetchUserProfile = async (token) => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/user/me/', {
+      const response = await axios.get('https://routine-tracker-api-g32g.onrender.com/api/user/me/', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUserData(response.data); 
@@ -45,7 +45,7 @@ function App() {
     }
 
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/tasks/', {
+      const response = await axios.get('https://routine-tracker-api-g32g.onrender.com/api/tasks/', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTasks(response.data);
