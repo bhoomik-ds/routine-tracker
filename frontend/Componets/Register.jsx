@@ -36,7 +36,7 @@ const Register = ({ onRegisterSuccess, onGoToLogin }) => {
     setLoading(true);
     setError("");
     try {
-      await axios.post('http://127.0.0.1:8000/api/auth/send-otp/', { 
+      await axios.post('https://routine-tracker-api-g32g.onrender.com/api/auth/send-otp/', { 
         email: formData.email 
       });
       setStep(2); 
@@ -52,7 +52,7 @@ const Register = ({ onRegisterSuccess, onGoToLogin }) => {
     setLoading(true);
     setError("");
     try {
-      await axios.post('http://127.0.0.1:8000/api/auth/verify-otp/', { 
+      await axios.post('https://routine-tracker-api-g32g.onrender.com/api/auth/verify-otp/', { 
         email: formData.email, 
         otp_code: formData.otp 
       });
@@ -80,7 +80,7 @@ const Register = ({ onRegisterSuccess, onGoToLogin }) => {
 
     setLoading(true);
     try {
-      await axios.post('http://127.0.0.1:8000/api/auth/register/', {
+      await axios.post('https://routine-tracker-api-g32g.onrender.com/api/auth/register/', {
         username: formData.username, 
         email: formData.email,
         full_name: formData.fullName, // <--- UPDATED: Sending full_name instead of dob
